@@ -1,6 +1,7 @@
 from app import db
 from datetime import datetime, timezone
 from werkzeug.security import generate_password_hash, check_password_hash
+from .user_groups import user_groups
 
 class User(db.Model):
     __tablename__ = "users"
@@ -37,6 +38,14 @@ class User(db.Model):
         default=lambda: datetime.now(timezone.utc),
         onupdate=lambda: datetime.now(timezone.utc),
         nullable=False
+    )
+
+
+    # Relationship to Group
+    groups = db.relationship(
+        "Group",
+        secondary=user_groups,
+        back_populates="users"
     )
 
     def __repr__(self):

@@ -8,8 +8,6 @@ class UserService:
     @staticmethod
     def create_user(username: str, email: str, password:str):
         try:
-            # SQLAlchemy models expect keyword arguments; passing positional
-            # arguments causes "__init__() takes 1 positional argument but 4 were given".
             user = User(username=username, email=email)
             user.set_password(password)
             db.session.add(user)

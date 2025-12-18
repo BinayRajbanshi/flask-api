@@ -10,12 +10,7 @@ migrate = Migrate()
 
 
 def create_app(config_name: str = None):
-    """
-    Application factory pattern.
-    
-    Args:
-        config_name: Configuration environment name (development, production, testing)
-        
+    """        
     Returns:
         Flask application instance
     """
@@ -30,14 +25,12 @@ def create_app(config_name: str = None):
     migrate.init_app(app, db)
     
     # Register blueprints
-    from app.routes import todo_bp, user_bp, group_bp
+    from app.routes import todo_bp, user_bp, group_bp, permission_bp
     app.register_blueprint(todo_bp)
     app.register_blueprint(user_bp)
     app.register_blueprint(group_bp)
+    app.register_blueprint(permission_bp)
     
-    # Import models for Alembic migrations
-    from app.models import Todo  # noqa: F401
-    from app.models import User
     
     
     return app

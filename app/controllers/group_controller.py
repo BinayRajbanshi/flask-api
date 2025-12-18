@@ -11,8 +11,7 @@ class GroupController:
     def create_group() -> Tuple:
         data = request.get_json()
         
-        if not data:
-            return error_response("Request body is required", 400)
+
 
         schema = GroupCreateschema()
 

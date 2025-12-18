@@ -13,8 +13,7 @@ class TodoController:
     def create_todo() -> Tuple:
         data = request.get_json()
 
-        if not data:
-            return error_response("Request body is required", 400)
+
 
         schema = TodoCreateSchema()
 
@@ -58,8 +57,7 @@ class TodoController:
 
         data = request.get_json()
 
-        if not data:
-            return error_response("Request body is required", 400)
+
 
         schema = TodoUpdateSchema()
 
