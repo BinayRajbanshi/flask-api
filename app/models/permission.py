@@ -11,15 +11,15 @@ class Permission(db.Model):
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), nullable=True)
     updated_at = db.Column(db.DateTime, default=datetime.now(timezone.utc), onupdate=datetime.now(timezone.utc), nullable=True)
 
-     # Relationship to permission
+     # Relationship to Group
     groups = db.relationship(
-        "Groups",
+        "Group",
         secondary=group_permissions,
-        back_populates="groups"
+        back_populates="permissions"
     )
 
     def __repr__(self):
-        return f"<Permission {self.id}: {self.title}>"
+        return f"<Permission {self.id}: {self.permission_code}>"
 
 
 # Converts a SQLAlchemy model instance into a plain Python dictionary.
@@ -31,9 +31,3 @@ class Permission(db.Model):
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "updated_at": self.updated_at.isoformat() if self.updated_at else None
         }
-    
-
-#     __repr__ vs __str__
-# Method	Audience	Purpose
-# __repr__	Developers	Unambiguous, debug-friendly
-# __str__	End users	Human-friendly

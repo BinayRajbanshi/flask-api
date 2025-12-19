@@ -20,14 +20,14 @@ class Group(db.Model):
     )
 
     # Relationship to permission
-    permission = db.relationship(
+    permissions = db.relationship(
         "Permission",
         secondary=group_permissions,
-        back_populates="permission"
+        back_populates="groups"
     )
 
     def __repr__(self):
-        return f"<Group {self.id}: {self.title}>"
+        return f"<Group {self.id}: {self.name}>"
 
 
 # Converts a SQLAlchemy model instance into a plain Python dictionary.
